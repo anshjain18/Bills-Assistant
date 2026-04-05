@@ -154,8 +154,3 @@ Indexes and foreign keys are enabled in schema setup; a small migration adds `is
 - Receipt files live under the app **document directory**; deleting the app removes local data unless exported.
 - For questions about navigation types, see `src/navigation/types.ts` (`RootStackParamList`, `MainTabParamList`).
 
----
-
-## License
-
-Private project (`"private": true` in `package.json`). Adjust licensing if you publish the repository.
