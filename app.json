@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "bills_sorting",
+    "name": "Bills Assistant",
     "slug": "bills_sorting",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,7 +13,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Bills assistant uses the camera to capture receipts you choose to save.",
+        "NSPhotoLibraryUsageDescription": "Allow access if you choose a photo from your library."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +29,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-sqlite",
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "Allow Assistant to capture photos of your receipts.",
+          "photosPermission": "Allow Assistant to attach receipt photos from your library."
+        }
+      ],
+      "@react-native-community/datetimepicker"
+    ]
   }
 }

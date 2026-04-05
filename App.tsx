@@ -1,19 +1,47 @@
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { RootNavigator } from './src/navigation/RootNavigator';
+import { openDatabase } from './src/db/client';
+import { colors } from './src/theme/colors';
 
 export default function App() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    openDatabase()
+      .then(() => setReady(true))
+      .catch(() => setReady(true));
+  }, []);
+
+  if (!ready) {
+    return (
+      <View style={styles.boot}>
+        <ActivityIndicator size="large" color={colors.accent} />
+      </View>
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <GestureHandlerRootView style={styles.flex}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <StatusBar style="dark" />
+          <RootNavigator />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  flex: { flex: 1 },
+  boot: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.bg,
     alignItems: 'center',
     justifyContent: 'center',
   },
