@@ -1,5 +1,5 @@
 {
-  "name": "bills_sorting",
+  "name": "bills-assistant",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
